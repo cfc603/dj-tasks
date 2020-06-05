@@ -2,10 +2,7 @@
 
 from django.contrib import admin
 
-from .models import (
-   Task,
-   TaskRun,
-)
+from .models import Task, TaskRun
 
 
 @admin.register(Task)
@@ -16,6 +13,3 @@ class TaskAdmin(admin.ModelAdmin):
 @admin.register(TaskRun)
 class TaskRunAdmin(admin.ModelAdmin):
     pass
-
-
-

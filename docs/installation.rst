@@ -4,9 +4,14 @@ Installation
 
 At the command line::
 
-    $ easy_install dj-tasks
-
-Or, if you have virtualenvwrapper installed::
-
-    $ mkvirtualenv dj-tasks
     $ pip install dj-tasks
+
+Add ``dj_tasks`` to your ``INSTALLED_APPS1``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        ...
+        "dj_tasks",
+        ...
+    ]

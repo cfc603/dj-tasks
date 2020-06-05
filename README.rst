@@ -25,33 +25,42 @@ Install dj-tasks::
 
     pip install dj-tasks
 
-Add it to your `INSTALLED_APPS`:
+Add it to your ``INSTALLED_APPS``:
 
 .. code-block:: python
 
-    INSTALLED_APPS = (
+    # project/settings.py
+    INSTALLED_APPS = [
         ...
-        'dj_tasks.apps.DjTasksConfig',
-        ...
-    )
-
-Add dj-tasks's URL patterns:
-
-.. code-block:: python
-
-    from dj_tasks import urls as dj_tasks_urls
-
-
-    urlpatterns = [
-        ...
-        url(r'^', include(dj_tasks_urls)),
+        'dj_tasks',
         ...
     ]
 
-Features
---------
+Create a task:
 
-* TODO
+.. code-block:: python
+
+    # your_app/tasks.py
+    from dj_tasks.tasks import Task
+
+
+    class YourTask(Task):
+
+        name = "Your Task"
+        frequency = 60
+
+        def run(self):
+            print("Your custom code...")
+
+Add to your ``DJTASKS_TASKS`` settings:
+
+.. code-block:: python
+
+    # project/settings.py
+    DJTASKS_TAKS = [
+        "your_app.tasks.Task",
+    ]
+
 
 Running Tests
 -------------

@@ -31,9 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'dj_tasks',
-    
-    'dj_tasks.test_utils.test_app'
-    
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -48,8 +45,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'tests.urls'
 
 TEMPLATES = [
     {
@@ -114,3 +109,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# dj_tasks settings
+DJTASKS_TASKS = ["dj_tasks.tasks.Task"]

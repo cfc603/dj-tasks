@@ -3,9 +3,12 @@ branch = true
 
 [report]
 omit =
+    *migrations*
     *site-packages*
+    *settings.py
     *tests*
     *.tox*
 show_missing = True
 exclude_lines =
     raise NotImplementedError
+    pragma: no cover

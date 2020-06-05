@@ -2,25 +2,30 @@
 Usage
 =====
 
-To use dj-tasks in a project, add it to your `INSTALLED_APPS`:
+``dj_tasks`` provides a parent ``Task`` that all declared tasks should inherit from. It includes two required attributes ``name`` and ``frequency``, where ``name`` is how it will be displayed in the standard output of the management command and ``frequency`` is how often it should run in seconds. Finally, it must override the ``run`` method which will provide the task functionality.
 
 .. code-block:: python
 
-    INSTALLED_APPS = (
-        ...
-        'dj_tasks.apps.DjTasksConfig',
-        ...
-    )
+    # your_app/tasks.py
+    from dj_tasks.tasks import Task
 
-Add dj-tasks's URL patterns:
+    class MyTask(Task):
+
+        name = "My Custom Task"
+        frequency = 20
+
+        def run(self):
+            print(f"{self.name} that runs every {self.frequency} seconds.")
+
+
+In your project ``settings.py`` declare your new task.
 
 .. code-block:: python
 
-    from dj_tasks import urls as dj_tasks_urls
-
-
-    urlpatterns = [
-        ...
-        url(r'^', include(dj_tasks_urls)),
-        ...
+    DJTASKS_TASKS = [
+        "your_app.tasks.MyTask",
     ]
+
+At the command line:
+
+    ``$ python manage.py run_tasks``
