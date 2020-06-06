@@ -57,7 +57,7 @@ Add to your ``DJTASKS_TASKS`` settings:
 .. code-block:: python
 
     # project/settings.py
-    DJTASKS_TAKS = [
+    DJTASKS_TASKS = [
         "your_app.tasks.Task",
     ]
 
