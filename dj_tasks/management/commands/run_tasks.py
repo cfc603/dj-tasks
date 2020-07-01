@@ -23,6 +23,11 @@ class Command(BaseCommand):
             help="Specify when on production server.",
         )
 
+    def get_lock_id(self):
+        if dj_tasks_settings.DJTASKS_LOCK_ID:
+            return dj_tasks_settings.DJTASKS_LOCK_ID
+        raise NotImplementedError("Specify DJTASKS_LOCK_ID in settings")
+
     def get_tasks(self):
         tasks = []
         for task in dj_tasks_settings.DJTASKS_TASKS:
@@ -46,7 +51,7 @@ class Command(BaseCommand):
         global lock_socket
         lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
 
-        lock_id = "dj_tasks.tasks"
+        lock_id = self.get_lock_id()
         if production:
             lock_id += ".production"
 

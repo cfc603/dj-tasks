@@ -112,3 +112,4 @@ STATIC_URL = '/static/'
 
 # dj_tasks settings
 DJTASKS_TASKS = ["dj_tasks.tasks.Task"]
+DJTASKS_LOCK_ID = "123456"

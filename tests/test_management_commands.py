@@ -11,6 +11,13 @@ from dj_tasks.management.commands.run_tasks import Command
 
 class CommandTest(TestCase):
 
+    def test_get_lock_id_if(self):
+        # setup
+        command = Command()
+
+        # asserts
+        self.assertEqual(command.get_lock_id(), "123456")
+
     def test_get_tasks(self):
         # setup
         command = Command()

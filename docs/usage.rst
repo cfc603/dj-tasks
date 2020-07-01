@@ -22,6 +22,7 @@ In your project ``settings.py`` declare your new task.
 
 .. code-block:: python
 
+    DJTASKS_LOCK_ID = "your_django_project"
     DJTASKS_TASKS = [
         "your_app.tasks.MyTask",
     ]
