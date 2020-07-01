@@ -7,6 +7,11 @@ DJTASKS_LOCK = True
 
 If ``True``, the management command will exit if another instance of the command is already running. This was a workaround PythonAnywhere used to offer for `Long Running Tasks <https://help.pythonanywhere.com/pages/LongRunningTasks/>`_ to ensure your task is always running, they have since switched to offering a paid feature `Always-on Tasks <https://help.pythonanywhere.com/pages/AlwaysOnTasks>`_. It's no longer documented, but it still is a valid option.
 
+DJTASKS_LOCK_ID = ""
+====================
+
+This must be set in order to use the ``run_tasks`` management command. A good naming convention would be to use your Django project name.
+
 DJTASKS_SLEEP_INTERVAL = 10
 ===========================
 

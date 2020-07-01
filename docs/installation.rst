@@ -6,7 +6,7 @@ At the command line::
 
     $ pip install dj-tasks
 
-Add ``dj_tasks`` to your ``INSTALLED_APPS1``:
+Add ``dj_tasks`` to your ``INSTALLED_APPS``:
 
 .. code-block:: python
 
@@ -15,3 +15,5 @@ Add ``dj_tasks`` to your ``INSTALLED_APPS1``:
         "dj_tasks",
         ...
     ]
+
+    DJTASKS_LOCK_ID = "your_django_project"
