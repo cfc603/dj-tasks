@@ -48,3 +48,7 @@ docs/_build
 
 # sqlite
 *.sqlite3
+
+# pipenv
+Pipfile
+Pipfile.lock
