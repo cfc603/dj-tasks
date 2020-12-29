@@ -71,10 +71,6 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
 
-release: clean ## package and upload a release
-	. venv/bin/activate; python setup.py sdist upload
-	. venv/bin/activate; python setup.py bdist_wheel upload
-
 package: clean ## package
 	. venv/bin/activate; python setup.py sdist bdist_wheel
 
