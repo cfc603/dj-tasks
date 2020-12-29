@@ -75,9 +75,17 @@ release: clean ## package and upload a release
 	. venv/bin/activate; python setup.py sdist upload
 	. venv/bin/activate; python setup.py bdist_wheel upload
 
-sdist: clean ## package
-	. venv/bin/activate; python setup.py sdist
-	ls -l dist
+package: clean ## package
+	. venv/bin/activate; python setup.py sdist bdist_wheel
+
+package-test: clean package ## build and check new package
+	. venv/bin/activate; twine check dist/*
+
+release: clean ## package and upload a release
+	. venv/bin/activate; twine upload dist/*
+
+release-test: package-test ## upload to TestPyPi
+	. venv/bin/activate; twine upload -r testpypi dist/*
 
 github: ## open GitHub repo
 	sensible-browser https://github.com/cfc603/dj-tasks
