@@ -3,10 +3,15 @@
 History
 -------
 
-1.0.1 (TDB)
-+++++++++++
+1.1.0 (2020-12-28)
+++++++++++++++++++
 
 * add documentation of ``DJTASKS_LOCK_ID`` to Quickstart
+* update MakeFile to use current work flow
+* close database connection after each full run
+* add dj_tasks.tasks.DeleteOldTaskRunTask
+* flake8 fixes
+* add twine for easier releases
 
 1.0.0 (2020-07-01)
 ++++++++++++++++++
