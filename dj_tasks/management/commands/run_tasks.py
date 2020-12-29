@@ -5,6 +5,7 @@ import sys
 import time
 
 from django.core.management.base import BaseCommand
+from django.db import connection
 
 from dj_tasks import settings as dj_tasks_settings
 from dj_tasks.utils import get_class
@@ -43,6 +44,10 @@ class Command(BaseCommand):
             for Task in self.get_tasks():
                 task = Task(self.output)
                 task.full_run()
+
+            # clone database connection
+            connection.close()
+            self.output("Database connection closed.")
 
             # no need to run more frequently than the tasks require
             time.sleep(dj_tasks_settings.DJTASKS_SLEEP_INTERVAL)
