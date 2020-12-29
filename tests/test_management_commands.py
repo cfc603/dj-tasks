@@ -5,7 +5,7 @@ from unittest.mock import Mock, call, patch
 
 from django.test import TestCase
 
-from dj_tasks.tasks import Task
+from dj_tasks.tasks import Task, DeleteOldTaskRunTask
 from dj_tasks.management.commands.run_tasks import Command
 
 
@@ -23,7 +23,7 @@ class CommandTest(TestCase):
         command = Command()
 
         # asserts
-        self.assertEqual(command.get_tasks(), [Task])
+        self.assertEqual(command.get_tasks(), [Task, DeleteOldTaskRunTask])
 
     def test_output(self):
         # setup

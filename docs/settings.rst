@@ -2,6 +2,11 @@
 SETTINGS
 =====
 
+DJTASKS_DELETE_INTERVAL = 14
+============================
+
+Interval in days to specify how old ``dj_tasks.models.TaskRun`` entries to delete. Run daily through ``dj_tasks.tasks.DeleteOldTaskRunTask``.
+
 DJTASKS_LOCK = True
 ===================
 

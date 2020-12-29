@@ -10,11 +10,12 @@ Tests for `dj-tasks` tasks module.
 from unittest.mock import Mock, patch
 
 from django.test import TestCase
+from django.utils import timezone
 
 from model_bakery import baker
 
-from dj_tasks.models import Task as TaskModel
-from dj_tasks.tasks import Task
+from dj_tasks.models import Task as TaskModel, TaskRun
+from dj_tasks.tasks import Task, DeleteOldTaskRunTask
 
 
 class TestDj_tasks(TestCase):
@@ -123,3 +124,27 @@ class TestDj_tasks(TestCase):
         # asserts
         with self.assertRaises(NotImplementedError):
             task.run()
+
+
+class TestDeleteOldTaskRunTask(TestCase):
+
+    def test_run(self):
+        # setup
+        now = timezone.now()
+
+        days = [15, 16, 13, 1]
+        all_runs = []
+        for day in days:
+            task_run = baker.make(TaskRun)
+            task_run.created = now - timezone.timedelta(days=day)
+            task_run.save()
+            all_runs.append(task_run)
+
+        DeleteOldTaskRunTask(Mock()).run()
+
+        task_runs = TaskRun.objects.all()
+
+        # asserts
+        self.assertEqual(task_runs.count(), 2)
+        self.assertIn(all_runs[1], all_runs)
+        self.assertIn(all_runs[2], all_runs)
