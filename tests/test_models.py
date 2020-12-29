@@ -7,8 +7,6 @@ test_dj-tasks
 
 Tests for `dj-tasks` models module.
 """
-from unittest.mock import patch
-
 from django.test import TestCase
 from django.utils import timezone
 
@@ -55,7 +53,7 @@ class TestDj_tasks(TestCase):
     def test_run_again_false(self):
         # setup
         task = baker.make("dj_tasks.Task", frequency=5)
-        task_run = baker.make("dj_tasks.TaskRun", task=task)
+        baker.make("dj_tasks.TaskRun", task=task)
 
         # asserts
         self.assertFalse(task.run_again())

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from django.utils import timezone
+
+from dj_tasks import settings as dj_tasks_settings
+
 from .models import Task as TaskModel, TaskRun
 
 
@@ -37,3 +41,17 @@ class Task:
 
     def run(self):
         raise NotImplementedError("Every task needs a run method.")
+
+
+class DeleteOldTaskRunTask(Task):
+
+    name = "Delete old TaskRun entries"
+    frequency = 60 * 60 * 24  # daily
+
+    def run(self):
+        interval = timezone.timedelta(
+            days=dj_tasks_settings.DJTASKS_DELETE_INTERVAL
+        )
+        task_runs = TaskRun.objects.filter(created__lte=timezone.now() - interval)
+        if task_runs.exists():
+            task_runs.delete()
