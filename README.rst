@@ -5,8 +5,8 @@ dj-tasks
 .. image:: https://badge.fury.io/py/dj-tasks.svg
     :target: https://badge.fury.io/py/dj-tasks
 
-.. image:: https://travis-ci.org/cfc603/dj-tasks.svg?branch=master
-    :target: https://travis-ci.org/cfc603/dj-tasks
+.. image:: https://github.com/cfc603/dj-tasks/workflows/Django%20CI/badge.svg
+    :target: https://github.com/cfc603/dj-tasks/actions
 
 .. image:: https://codecov.io/gh/cfc603/dj-tasks/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/cfc603/dj-tasks
