@@ -12,6 +12,8 @@ History
 * add dj_tasks.tasks.DeleteOldTaskRunTask
 * flake8 fixes
 * add twine for easier releases
+* move to GitHub Actions from Travis CI
+* drop testing with tox
 
 1.0.0 (2020-07-01)
 ++++++++++++++++++
