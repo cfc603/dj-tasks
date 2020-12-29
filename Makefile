@@ -51,9 +51,6 @@ lint: ## check style with flake8
 test: venv ## run local env tests
 	. venv/bin/activate; python runtests.py tests
 
-test-all: ## run tests on every Python version with tox
-	tox
-
 coverage: venv ## run coverage
 	. venv/bin/activate; coverage run --source dj_tasks runtests.py tests
 
