@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from unittest.mock import Mock, call, patch
+from unittest.mock import Mock
 
 from django.test import TestCase
 

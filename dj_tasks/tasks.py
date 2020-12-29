@@ -46,7 +46,7 @@ class Task:
 class DeleteOldTaskRunTask(Task):
 
     name = "Delete old TaskRun entries"
-    frequency = 60 * 60 * 24 # daily
+    frequency = 60 * 60 * 24  # daily
 
     def run(self):
         interval = timezone.timedelta(
