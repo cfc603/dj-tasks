@@ -12,6 +12,12 @@ endef
 export BROWSER_PYSCRIPT
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
+VIRTUALENV = $(shell which virtualenv)
+
+ifeq ($(strip $(VIRTUALENV)),)
+  VIRTUALENV = /usr/local/python3/bin/virtualenv
+ endif
+
 help:
 	@grep '^[a-zA-Z]' $(MAKEFILE_LIST) | sort | awk -F ':.*?## ' 'NF==2 {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}'
 
@@ -27,20 +33,35 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-lint: ## check style with flake8
-	flake8 dj_tasks tests
+venv: ## create virtualenv
+	$(VIRTUALENV) venv
 
-test: ## run tests quickly with the default Python
-	python runtests.py tests
+install: venv ## install requirements
+	. venv/bin/activate; pip install -r requirements.txt
+
+install-test: venv install ## install test requirements
+	. venv/bin/activate; pip install -r requirements_test.txt
+
+install-dev: venv install install-test ## instal dev requirements
+	. venv/bin/activate; pip install -r requirements_dev.txt
+
+lint: ## check style with flake8
+	. venv/bin/activate; flake8 dj_tasks tests
+
+test: venv ## run local env tests
+	. venv/bin/activate; python runtests.py tests
 
 test-all: ## run tests on every Python version with tox
 	tox
 
-coverage: ## check code coverage quickly with the default Python
-	coverage run --source dj_tasks runtests.py tests
-	coverage report -m
-	coverage html
-	open htmlcov/index.html
+coverage: venv ## run coverage
+	. venv/bin/activate; coverage run --source dj_tasks runtests.py tests
+
+htmlcov: venv ## run coverage and show html report
+	. venv/bin/activate; coverage run --source dj_tasks runtests.py tests
+	. venv/bin/activate; coverage report -m
+	. venv/bin/activate; coverage html
+	sensible-browser htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/dj-tasks.rst
@@ -51,9 +72,12 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	$(BROWSER) docs/_build/html/index.html
 
 release: clean ## package and upload a release
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	. venv/bin/activate; python setup.py sdist upload
+	. venv/bin/activate; python setup.py bdist_wheel upload
 
 sdist: clean ## package
-	python setup.py sdist
+	. venv/bin/activate; python setup.py sdist
 	ls -l dist
+
+github: ## open GitHub repo
+	sensible-browser https://github.com/cfc603/dj-tasks
