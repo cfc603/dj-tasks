@@ -59,7 +59,7 @@ Add to your ``DJTASKS_TASKS`` settings:
     # project/settings.py
     DJTASKS_LOCK_ID = "your_django_project"
     DJTASKS_TASKS = [
-        "your_app.tasks.Task",
+        "your_app.tasks.YourTask",
     ]
 
 
