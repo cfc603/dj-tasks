@@ -3,6 +3,13 @@
 History
 -------
 
+2.0.0 (2022-09-25)
+++++++++++++++++++
+
+* handle exception when running individual tasks
+* Drop support for django <3.2
+* Add support for django 4.0 and 4.1
+
 1.1.0 (2020-12-28)
 ++++++++++++++++++
 

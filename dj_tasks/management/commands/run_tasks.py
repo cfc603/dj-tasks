@@ -43,7 +43,11 @@ class Command(BaseCommand):
         while True:
             for Task in self.get_tasks():
                 task = Task(self.output)
-                task.full_run()
+                try:
+                    task.full_run()
+                except Exception as e:
+                    msg = f"Error occurred while running task {task.name}: {e}"
+                    self.output(msg, "WARNING")
 
             # clone database connection
             connection.close()
